@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layoutDirection="rtl"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/items_layout"
+    android:tag="layout">
+
+<!--    android:background="?android:attr/selectableItemBackground"-->
+<!--    android:clickable="true"-->
+<!--    android:focusable="true"-->
+
+    <TextView
+        android:id="@+id/item_number"
+        android:tag="click_to_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="מספר"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/content"
+        android:tag="click_to_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="מספר"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:layout_toLeftOf="@+id/item_number"/>
+
+    <TextView
+        android:id="@+id/mac"
+        android:tag="click_to_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="מספר"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:layout_toLeftOf="@+id/content"/>
+
+    <TextView
+        android:id="@+id/rssi"
+        android:tag="click_to_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="מספר"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:layout_toLeftOf="@+id/mac"/>
+</RelativeLayout>
