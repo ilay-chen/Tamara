@@ -20,19 +20,17 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         Intent serviceIntent = new Intent(this, ForegroundService.class);
-        serviceIntent.putExtra("inputExtra", "Foreground Service Example in Android");
         ContextCompat.startForegroundService(this, serviceIntent);
 
         hasPermissions();
 
-        one = findViewById(R.id.buttonStartService);
-        two = findViewById(R.id.buttonStopService);
+        one = findViewById(R.id.search_now);
+        two = findViewById(R.id.show_history);
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), search_ble.class);
                 startActivity(i);
-//                startService();
             }
         });
         two.setOnClickListener(new View.OnClickListener() {
@@ -40,19 +38,16 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), show_sql.class);
                 startActivity(i);
-//                stopService();
             }
         });
 
     }
 
     private boolean hasPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (getApplicationContext().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[] { Manifest.permission.ACCESS_COARSE_LOCATION }, ACCESS_COARSE_LOCATION_REQUEST);
                 return false;
             }
-        }
         return true;
     }
 }

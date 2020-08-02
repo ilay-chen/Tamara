@@ -6,10 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".show_sql">
 
-    <ListView
-        android:id="@+id/list_sql"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:background="#FFFFFF"
+        app:layoutManager="LinearLayoutManager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ListView>
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:context=".OrderFragment"
+        tools:listitem="@layout/fragment_item" />
 
 </LinearLayout>

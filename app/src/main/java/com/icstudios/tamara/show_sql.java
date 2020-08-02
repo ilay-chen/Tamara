@@ -1,6 +1,10 @@
 package com.icstudios.tamara;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -8,29 +12,40 @@ import android.widget.ListView;
 
 import java.util.List;
 
+import static com.icstudios.tamara.orderListItem.refreshList;
+
 public class show_sql extends AppCompatActivity {
     SQLiteDatabaseHandler db;
+    MyOrderFragmentRecyclerViewAdapter listAdapter;
+    private int mColumnCount = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_sql);
+        RecyclerView recyclerView = findViewById(R.id.list);
 
         db = new SQLiteDatabaseHandler(this);
 
-        List<orderListItem.ScanItem> players = db.allPlayers();
+        List<orderListItem.ScanItem> bleResults = db.allbleResultsByDate();
 
-        if (players != null) {
-            String[] itemsNames = new String[players.size()];
+        if (bleResults != null) {
 
-            for (int i = 0; i < players.size(); i++) {
-                itemsNames[i] = players.get(i).getAddress();
+            refreshList(bleResults);
+
+            // Set the adapter
+            if (recyclerView instanceof RecyclerView) {
+                if (mColumnCount <= 1) {
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                } else {
+                    recyclerView.setLayoutManager(new GridLayoutManager(this, mColumnCount));
+                }
+
+                listAdapter = new MyOrderFragmentRecyclerViewAdapter(orderListItem.ITEMS);
+                recyclerView.setAdapter(listAdapter);
+                recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
             }
-
-            // display like string instances
-            ListView list = (ListView) findViewById(R.id.list_sql);
-            list.setAdapter(new ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1, android.R.id.text1, itemsNames));
-
         }
     }
 }

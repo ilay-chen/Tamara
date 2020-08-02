@@ -7,23 +7,23 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/buttonStartService"
+        android:id="@+id/search_now"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorAccent"
         android:padding="16dp"
-        android:text="Start Service"
+        android:text="Find around me"
         android:textColor="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/buttonStopService"
+        app:layout_constraintBottom_toTopOf="@+id/show_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
     <Button
-        android:id="@+id/buttonStopService"
+        android:id="@+id/show_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -32,12 +32,12 @@
         android:layout_marginBottom="8dp"
         android:background="@color/colorAccent"
         android:padding="16dp"
-        android:text="Stop Service"
+        android:text="Show history"
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStartService"
+        app:layout_constraintTop_toBottomOf="@+id/search_now"
         app:layout_constraintVertical_bias="0.218" />
 </androidx.constraintlayout.widget.ConstraintLayout>

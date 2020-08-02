@@ -48,7 +48,7 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public orderListItem.ScanItem getPlayer(int id) {
+    public orderListItem.ScanItem getbleResult(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, // a. table
                 COLUMNS, // b. column names
@@ -62,61 +62,82 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        orderListItem.ScanItem player = new orderListItem.ScanItem();
-        player.setName(cursor.getString(0));
-        player.setAddress(cursor.getString(1));
-        player.setDate(cursor.getString(2));
-        player.setRssi(cursor.getString(3));
-
-        return player;
+        orderListItem.ScanItem bleResult = new orderListItem.ScanItem();
+        bleResult.setName(cursor.getString(1));
+        bleResult.setAddress(cursor.getString(2));
+        bleResult.setDate(cursor.getString(3));
+        bleResult.setRssi(cursor.getString(4));
+        return bleResult;
     }
 
-    public List<orderListItem.ScanItem> allPlayers() {
+    public List<orderListItem.ScanItem> allbleResults() {
 
-        List<orderListItem.ScanItem> players = new LinkedList<orderListItem.ScanItem>();
+        List<orderListItem.ScanItem> bleResults = new LinkedList<orderListItem.ScanItem>();
         String query = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        orderListItem.ScanItem player = null;
+        orderListItem.ScanItem bleResult = null;
 
         if (cursor.moveToFirst()) {
             do {
-                player = new orderListItem.ScanItem();
-                player.setName(cursor.getString(1));
-                player.setAddress(cursor.getString(2));
-                player.setDate(cursor.getString(3));
-                player.setRssi(cursor.getString(4));
-                players.add(player);
+                bleResult = new orderListItem.ScanItem();
+                bleResult.setName(cursor.getString(1));
+                bleResult.setAddress(cursor.getString(2));
+                bleResult.setDate(cursor.getString(3));
+                bleResult.setRssi(cursor.getString(4));
+                bleResults.add(bleResult);
             } while (cursor.moveToNext());
         }
 
-        return players;
+        return bleResults;
     }
 
-    public void addPlayer(orderListItem.ScanItem player) {
+    public List<orderListItem.ScanItem> allbleResultsByDate() {
+
+        List<orderListItem.ScanItem> bleResults = new LinkedList<orderListItem.ScanItem>();
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY datetime(date) DESC";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        orderListItem.ScanItem bleResult = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                bleResult = new orderListItem.ScanItem();
+                bleResult.setName(cursor.getString(1));
+                bleResult.setAddress(cursor.getString(2));
+                bleResult.setDate(cursor.getString(3));
+                bleResult.setRssi(cursor.getString(4));
+                bleResults.add(bleResult);
+            } while (cursor.moveToNext());
+        }
+
+        return bleResults;
+    }
+
+    public void addbleResult(orderListItem.ScanItem bleResult) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, player.getName());
-        values.put(KEY_ADDRESS, player.getAddress());
-        values.put(KEY_DATE, player.getDate());
-        values.put(KEY_RSSI, player.getRssi());
+        values.put(KEY_NAME, bleResult.getName());
+        values.put(KEY_ADDRESS, bleResult.getAddress());
+        values.put(KEY_DATE, bleResult.getDate());
+        values.put(KEY_RSSI, bleResult.getRssi());
         // insert
         db.insert(TABLE_NAME,null, values);
         db.close();
     }
 
-    public int updatePlayer(orderListItem.ScanItem player) {
+    public int updatebleResult(orderListItem.ScanItem bleResult) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, player.getName());
-        values.put(KEY_ADDRESS, player.getAddress());
-        values.put(KEY_DATE, player.getDate());
-        values.put(KEY_RSSI, player.getRssi());
+        values.put(KEY_NAME, bleResult.getName());
+        values.put(KEY_ADDRESS, bleResult.getAddress());
+        values.put(KEY_DATE, bleResult.getDate());
+        values.put(KEY_RSSI, bleResult.getRssi());
 
         int i = db.update(TABLE_NAME, // table
                 values, // column/value
                 "address = ?", // selections
-                new String[] { String.valueOf(player.getAddress()) });
+                new String[] { String.valueOf(bleResult.getAddress()) });
 
         db.close();
 

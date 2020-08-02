@@ -27,23 +27,21 @@ public class orderListItem {
 //    }
     public orderListItem() { }
 
-    public static void refreshList(List<ScanResult> newItems)
+    public static void refreshList(List<ScanItem> newItems)
     {
         ITEMS = new ArrayList<ScanItem>();
         ITEM_MAP = new HashMap<String, ScanItem>();
+        ITEMS.addAll(newItems);
         for (int i = 0; i < newItems.size(); i++)
         {
-            addItem(createOrderItem(newItems.get(i)));
+//            ITEMS.addAll(newItems);
+//            addItem(newItems.add());
         }
     }
 
     private static void addItem(ScanItem scanResult) {
         ITEMS.add(scanResult);
         ITEM_MAP.put("1", scanResult);
-    }
-
-    private static ScanItem createOrderItem(ScanResult scanResult) {
-        return new ScanItem(scanResult);
     }
 
     /**
@@ -59,10 +57,10 @@ public class orderListItem {
         public ScanItem() {
         }
 
-        public ScanItem(ScanResult scanResult) {
+        public ScanItem(ScanResult scanResult, String date) {
             this.name = scanResult.getDevice().getName();
             this.address = scanResult.getDevice().getAddress();
-            this.date = "date";
+            this.date = date;
             this.rssi = scanResult.getRssi()+"";
         }
 
