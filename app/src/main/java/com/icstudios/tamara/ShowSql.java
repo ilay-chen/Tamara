@@ -7,23 +7,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.os.Handler;
 
 import java.util.List;
 
-import static com.icstudios.tamara.orderListItem.refreshList;
-
-public class show_sql extends AppCompatActivity {
+public class ShowSql extends AppCompatActivity {
     SQLiteDatabaseHandler db;
     MyOrderFragmentRecyclerViewAdapter listAdapter;
     private int mColumnCount = 1;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_sql);
-        RecyclerView recyclerView = findViewById(R.id.list);
+        recyclerView = findViewById(R.id.list);
 
         db = new SQLiteDatabaseHandler(this);
 
@@ -31,7 +29,7 @@ public class show_sql extends AppCompatActivity {
 
         if (bleResults != null) {
 
-            refreshList(bleResults);
+            orderListItem.refreshList(bleResults);
 
             // Set the adapter
             if (recyclerView instanceof RecyclerView) {
@@ -44,7 +42,6 @@ public class show_sql extends AppCompatActivity {
                 listAdapter = new MyOrderFragmentRecyclerViewAdapter(orderListItem.ITEMS);
                 recyclerView.setAdapter(listAdapter);
                 recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-
             }
         }
     }

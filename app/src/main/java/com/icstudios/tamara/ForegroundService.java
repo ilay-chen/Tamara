@@ -44,23 +44,7 @@ public class ForegroundService extends Service {
     private final ScanCallback scanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
-//            BluetoothDevice device = result.getDevice();
-//            int i = 0;
-//            for( ; i < ITEMS.size(); i++) {
-//                String d = ITEMS.get(i).getAddress();
-//                String s = result.getDevice().getAddress();
-//                if(d.equals(s)) {
-//                    break;
-//                }
-//            }
-//            if(i>=ITEMS.size())
-//                ITEMS.add(i,new orderListItem.ScanItem(result));
-//            else ITEMS.set(i,new orderListItem.ScanItem(result));
-//
-//            //listAdapter.notifyDataSetChanged();
-////            orderListItem.refreshList(ITEMS);
-//            Log.d("tamara-test", "davice:" + device.getAddress()  + "rssi" + result.getRssi());
-            // ...do whatever you want with this found device
+
         }
 
         @Override
@@ -72,29 +56,13 @@ public class ForegroundService extends Service {
             for (ScanResult ss : results) {
 
                 Log.d("tamara-test", ss.getDevice().getName() + "rssi" + ss.getRssi() + ", date:" + date);
-                int i = 0;
-                for (; i < ITEMS.size(); i++) {
-                    String d = ITEMS.get(i).getAddress();
-                    String s = ss.getDevice().getAddress();
-                    if (d.equals(s)) {
-                        break;
-                    }
-                }
-
-                if (i >= ITEMS.size())
-                    ITEMS.add(i, new orderListItem.ScanItem(ss, date));
-                else ITEMS.set(i, new orderListItem.ScanItem(ss, date));
-
 
                 db.addbleResult(new orderListItem.ScanItem(ss, date));
-//                orderListItem.refreshList(results);
-                // Ignore for now
             }
         }
 
         @Override
         public void onScanFailed(int errorCode) {
-            // Ignore for now
         }
     };
 
